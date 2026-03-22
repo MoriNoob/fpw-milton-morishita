@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato</title>
+
+    <!-- Link para o arquivo css, único para todas os html -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    
+    <header>
+        <h1>Portfólio do Milton Morishita</h1>
+    </header>
+
+    <!-- Menu que aparece em todas as páginas. A classe "ativo" serve para sublinhar e deixar em negrito o título da página no menu que está aberta. Neste caso, a página aberta é a de "Contato" -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="sobre.html">Sobre mim</a></li>
+            <li><a href="formacao.html">Formação</a></li>
+            <li><a href="portfolio.html">Portfólio</a></li>
+            <li><a href="contato.html" class="ativo">Contato</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="form-box">
+            <h2>Envie sua mensagem</h2>
+        <form id="formContato">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome">
+            </div>
+        
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="text" id="email">
+            </div>
+
+            <div class="form-group">
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem"></textarea>
+            </div>
+
+            <button type="submit">Enviar</button>
+
+            <div class="mensagem-sucesso" id="sucesso">
+                Mensagem enviada com sucesso!
+            </div>
+        </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>Desenvolvido por Milton Morishita - 2026</p>
+    </footer>    
+
+<script>
+    const form = document.getElementById("formContato");
+    const sucesso = document.getElementById("sucesso");
+    const campos = document.querySelectorAll("#formContato input, #formContato textarea");
+
+    // Esconder a mensagem de "Sucesso" quando outro formulário começar a ser preenchido
+    campos.forEach(campo => {
+        campo.addEventListener("input", () => {
+            sucesso.style.display = "none";
+        });
+    });
+
+    // Envio do formulário
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Esconde a mensagem antes de validar novamente
+        sucesso.style.display = "none";
+
+        const nome = document.getElementById("nome").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const mensagem = document.getElementById("mensagem").value.trim();
+
+        // Regex para validação do e-mail
+        const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Validação do e-mail
+        if (nome === "" || email === "" || mensagem === "") {
+            alert("Por favor, preencha todos os campos.");
+            return;
+        }
+
+        // Alerta para inserção de e-mail em formato válido
+        if (!emailValido.test(email)) {
+            alert("Por favor, insira um e-mail válido.");
+            return;
+        }
+
+        // Simulação de envio
+        form.reset();
+
+        // Aprsentação de mensagem visual
+        sucesso.style.display = "block";
+
+        // Alerta para mensagem enviada com sucesso
+        alert("Mensagem enviada com sucesso!");
+        });
+</script>
+</body>
+</html>
